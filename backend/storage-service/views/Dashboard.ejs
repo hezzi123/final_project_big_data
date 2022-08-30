@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="desh.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./ConnectMongoDB.js"></script>
+        <script src="./BigML.js"></script>
+        <script src="./KafkaCunsumer.js"></script>
+        
+        <script>        
+        function details(){
+            //Take the user var
+            var day_type = document.getElementById("day_type").value;
+            var month = document.getElementById("month").value;
+            var day =  document.getElementById("day").value;
+            var company = document.getElementById("company").value;
+            var leaving_country = document.getElementById("leaving_country").value;
+            var landing_country = document.getElementById("landing_country").value;
+            var leaving_weather = document.getElementById("leaving_weather").value;
+            var landing_weather = document.getElementById("landing_weather").value;
+            var flight_type = document.getElementById("flight_type").value;
+        
+            if(company == "" || leaving_country == "" ||
+             landing_country == ""|| leaving_weather == "" || landing_weather == ""){
+                alert("Please enter all details!!");
+                return;
+            }
+            
+            if(month == "2" && day =="29" || month == "2" && day =="30" || month == "2" && day =="31")
+            {
+                alert("Bad Date!!");
+                return;
+            }
+
+            if(month == "4" && day =="31" || month == "6" && day =="31" || month == "9" && day =="31" || month == "11" && day =="31")
+            {
+                alert("Bad Date!!");
+                return;
+            }
+
+            window.location.href='http:/'+'/'+'localhost:3002/predictStatus/'+day_type+'/'
+                +month+'/'+day+'/'+company+'/'+leaving_country+'/'+landing_country+ '/' +leaving_weather + '/' + landing_weather + '/' +flight_type;
+
+            //Delete from textbox
+            document.getElementById("day_type").value = "";
+            document.getElementById("month").value = "";
+            document.getElementById("day").value = "";
+            document.getElementById("company").value = "";
+            document.getElementById("leaving_country").value = "";
+            document.getElementById("landing_country").value = "";
+            document.getElementById("leaving_weather").value = "";
+            document.getElementById("landing_weather").value = "";
+            document.getElementById("flight_type").value = "";
+            
+        }</script>
+    </head>
+
+    <body class="p-3 mb-2 bg-danger text-white" data-gr-c-s-loaded="true" onload="initSocket()">
+
+        <h1 align="center" style="color:rgb(16, 10, 118)">Predict Flight's Delay Status</h1>
+        <p align="center">Please enter flight details and click "Predict" to predict if the flight will be late.</p>
+        <p align="center">To build a new model, please click "Build Model".</p>
+        <h1 align="center">  </h1>
+        <h1 align="center">  </h1>
+        <h1 align="center">  </h1>
+        <body style="background-color:rgb(174, 235, 225);">
+        
+        <form name="bigmlp" class="form-inline " action="/action_page.php" >
+            <label for="day_type">Day type:</label>
+            <select id="day_type">
+                <option value='normal'>normal</option>
+                <option value='summer holliday'>summer holliday</option>
+                <option value='hag'>hag</option>
+            </select>
+            
+            <label for="month">Month:</label>
+            <select id="month">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+                <option value='12'>12</option>
+            </select>
+
+            
+            <label for="day">Day:</label>
+            <select id="day">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+                <option value='12'>12</option>
+                <option value='13'>13</option>
+                <option value='14'>14</option>
+                <option value='15'>15</option>
+                <option value='16'>16</option>
+                <option value='17'>17</option>
+                <option value='18'>18</option>
+                <option value='19'>19</option>
+                <option value='20'>20</option>
+                <option value='21'>21</option>
+                <option value='22'>22</option>
+                <option value='23'>23</option>
+                <option value='24'>24</option>
+                <option value='25'>25</option>
+                <option value='26'>26</option>
+                <option value='27'>27</option>
+                <option value='28'>28</option>
+                <option value='29'>29</option>
+                <option value='30'>30</option>
+                <option value='31'>31</option>
+            </select>
+            
+            <label for="company">Company:</label>
+            <input type="text" id="company" placeholder="Enter company" name="company">
+            
+            <label for="leaving_country">Leaving country:</label>
+            <input type="text" id="leaving_country" placeholder="Enter leaving country" name="leaving_country">
+
+            <label for="landing_country">Landing country:</label>
+            <input type="text" id="landing_country" placeholder="Enter landing country" name="landing_country">
+
+            <label for="leaving_weather">Leaving weather:</label>
+            <input type="text" id="leaving_weather" placeholder="Enter leaving weather" name="leaving_weather">
+
+            <label for="landing_weather">Landing country:</label>
+            <input type="text" id="landing_weather" placeholder="Enter landing weather" name="landing_weather">
+
+            <label for="flight_type">Flight type:</label>
+            <select id="flight_type">
+                <option value='short'>short</option>
+                <option value='middle'>middle</option>
+                <option value='long'>long</option>
+            </select>
+            
+                
+            <label for="space">     </label>
+            <button  type="button" onclick="details()">Predict</button>
+            <label for="space">     </label>
+
+            <another_button  type="button" onclick="location.href='http:/'+'/'+'localhost:3002/buildModel'" value="Build Model" class="input-group-text" >Build Model</another_button>
+            
+
+            
+
+        </form>
+
+    </body>
+</html>

@@ -1,0 +1,7 @@
+_id,day_type,month,day,company,leaving_country,landing_country,flight_type,leaving_weather,landing_weather,delay_status
+630b3d15160b6c013031b06f,summer_holliday,8,28,Emirates,United Arab Emirates,Israel,middle,Clear,Clear,big delay
+630b3d54160b6c013031b070,summer_holliday,8,28,Emirates,United Arab Emirates,Israel,middle,Clear,Clear,big delay
+630b984b8626759fbda9a43d,normal,8,28,Lufthansa,Turkey,Israel,middle,Clear,Clouds,small delay
+630b984b8626759fbda9a43e,normal,8,28,Turkish Airlines,Turkey,Israel,short,Clear,Clouds,big delay
+630ba0e1a6e5dc5558278f67,summer holliday,8,28,Brussels Airlines,France,Israel,middle,Clouds,Clouds,small delay
+630ba0e1a6e5dc5558278f68,normal,8,28,Lufthansa,France,Israel,middle,Clouds,Clouds,small delay
