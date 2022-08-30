@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Real Time Flights - BGA </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+</head>
+
+<body>
+  <script src="./socket.io.js"></script>
+
+  <div class="app">
+
+    <!-- map id for sho the map and the class for desgin-->
+    <div class="map" id="map"> </div>
+
+    <div class="apps-container">
+
+      <!-- clock -->
+      <div id="clock" class="topcorner"> </div>
+
+      <div class="container">
+        <span id="hours">00</span>
+        <span>:</span>
+        <span id="minutes">00</span>
+        <span>:</span>
+        <span id="seconds">00</span>
+        <span id="session">AM</span>
+      </div>
+
+      <!-- buttons -->
+      <div class="buttons">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <span id="dropbtn_">""</span>
+          </button>
+          <div class="dropdown-content">
+            <a span id="to_fly_1">""</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+
+        <div class="dropdown2">
+          <button class="dropbtn2">
+            <span id="dropbtn2_">""</span>
+          </button>
+          <div class="dropdown-content2">
+            <a span id="to_land_1">""</a>
+            <a href="#">Link 5</a>
+            <a href="#">Link 6</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- weather -->
+      <div class="weather">
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-5d739f8c-6d68-43e9-a19e-f33b317d256f"></div>
+      </div>
+
+
+    </div>
+  </div>
+
+</body>
+
+<script src="script.js" defer></script>
+
+</html>
